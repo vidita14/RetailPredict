@@ -1,0 +1,12 @@
+# The chart palette is validated against a known light surface (#fcfcfb), so the
+# app commits to the light theme rather than letting the surface shift underneath
+# the colors.
+[theme]
+base = "light"
+primaryColor = "#2a78d6"
+backgroundColor = "#fcfcfb"
+secondaryBackgroundColor = "#f9f9f7"
+textColor = "#0b0b0b"
+
+[server]
+headless = true

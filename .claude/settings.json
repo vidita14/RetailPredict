@@ -1,0 +1,33 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(python --version)",
+      "PowerShell(pip --version)",
+      "PowerShell(python -c \"import pandas, numpy, sklearn, mlxtend, streamlit, plotly, yaml, pytest; print\\('all deps present'\\)\" 2>&1)",
+      "PowerShell(python -m venv d:\\\\RetailPredict\\\\.venv)",
+      "PowerShell(d:\\\\RetailPredict\\\\.venv\\\\Scripts\\\\python.exe -m pip install --quiet --upgrade pip)",
+      "PowerShell(d:\\\\RetailPredict\\\\.venv\\\\Scripts\\\\python.exe -m pip install -r d:\\\\RetailPredict\\\\requirements.txt)",
+      "PowerShell(cd d:\\\\RetailPredict; $env:PYTHONPATH=\"d:\\\\RetailPredict\"; .\\\\.venv\\\\Scripts\\\\python.exe scripts\\\\make_sample_data.py --rows 40000)",
+      "PowerShell(cd d:\\\\RetailPredict; $env:PYTHONPATH=\"d:\\\\RetailPredict\"; .\\\\.venv\\\\Scripts\\\\python.exe run_pipeline.py)",
+      "PowerShell(cd d:\\\\RetailPredict; $env:PYTHONPATH=\"d:\\\\RetailPredict\"; .\\\\.venv\\\\Scripts\\\\python.exe \"C:\\\\Users\\\\vidit\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\d--RetailPredict\\\\04f521cd-511b-460c-a2c8-866e7c75c8d7\\\\scratchpad\\\\smoke1.py\")",
+      "PowerShell(cd d:\\\\RetailPredict; $env:PYTHONPATH=\"d:\\\\RetailPredict\"; .\\\\.venv\\\\Scripts\\\\python.exe \"C:\\\\Users\\\\vidit\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\d--RetailPredict\\\\04f521cd-511b-460c-a2c8-866e7c75c8d7\\\\scratchpad\\\\smoke2.py\")",
+      "PowerShell(cd d:\\\\RetailPredict; $env:PYTHONPATH=\"d:\\\\RetailPredict\"; .\\\\.venv\\\\Scripts\\\\python.exe \"C:\\\\Users\\\\vidit\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\d--RetailPredict\\\\04f521cd-511b-460c-a2c8-866e7c75c8d7\\\\scratchpad\\\\smoke3.py\" 2>&1 | Select-String -NotMatch \"INFO\")",
+      "PowerShell(cd d:\\\\RetailPredict; $env:PYTHONPATH=\"d:\\\\RetailPredict\"; .\\\\.venv\\\\Scripts\\\\python.exe run_pipeline.py 2>&1 | Select-String -Pattern \"pipeline|rfm|engine|evaluation|market_basket\" | Select-Object -Last 25)",
+      "Bash(node scripts/validate_palette.js \"#2a78d6,#eb6834,#1baf7a,#eda100,#e87ba4,#008300,#4a3aa7\" --mode light)",
+      "Bash(cp scripts/validate_palette.js /tmp/vp.mjs)",
+      "Bash(node /tmp/vp.mjs \"#2a78d6,#eb6834,#1baf7a,#eda100,#e87ba4,#008300,#4a3aa7\" --mode light)",
+      "Bash(cp C:/Users/vidit/AppData/Local/Temp/claude/bundled-skills/2.1.228/2892a08e086721c88810ed384e4db898/dataviz/scripts/validate_palette.js C:/Users/vidit/AppData/Local/Temp/claude/d--RetailPredict/04f521cd-511b-460c-a2c8-866e7c75c8d7/scratchpad/vp.mjs)",
+      "Bash(node C:/Users/vidit/AppData/Local/Temp/claude/d--RetailPredict/04f521cd-511b-460c-a2c8-866e7c75c8d7/scratchpad/vp.mjs '#2a78d6,#eb6834,#1baf7a,#eda100,#e87ba4,#008300,#4a3aa7' --mode light)",
+      "Bash(cp C:/Users/vidit/AppData/Local/Temp/claude/bundled-skills/2.1.228/2892a08e086721c88810ed384e4db898/dataviz/scripts/validate_palette.js C:/Users/vidit/AppData/Local/Temp/claude/d--RetailPredict/04f521cd-511b-460c-a2c8-866e7c75c8d7/scratchpad/vpdir/)",
+      "Bash(node C:/Users/vidit/AppData/Local/Temp/claude/d--RetailPredict/04f521cd-511b-460c-a2c8-866e7c75c8d7/scratchpad/vpdir/validate_palette.js '#2a78d6,#eb6834,#1baf7a,#eda100,#e87ba4,#008300,#4a3aa7' --mode light)",
+      "Bash(node C:/Users/vidit/AppData/Local/Temp/claude/d--RetailPredict/04f521cd-511b-460c-a2c8-866e7c75c8d7/scratchpad/vpdir/validate_palette.js '#3987e5,#d95926,#199e70,#c98500,#d55181,#008300,#9085e9' --mode dark)",
+      "PowerShell(cd d:\\\\RetailPredict; $env:PYTHONPATH=\"d:\\\\RetailPredict\"; .\\\\.venv\\\\Scripts\\\\python.exe \"C:\\\\Users\\\\vidit\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\d--RetailPredict\\\\04f521cd-511b-460c-a2c8-866e7c75c8d7\\\\scratchpad\\\\smoke_dash.py\")",
+      "Bash(cd d:/RetailPredict/dashboard && sed -i 's/use_container_width=True/width=\"stretch\"/g' app.py data.py theme.py pages/*.py && grep -rn \"use_container_width\" . | wc -l)",
+      "PowerShell(cd d:\\\\RetailPredict; $env:PYTHONPATH=\"d:\\\\RetailPredict\"; .\\\\.venv\\\\Scripts\\\\python.exe -m pytest 2>&1 | Select-String -Pattern \"passed|failed|FAILED|Error\" | Select-Object -Last 15)",
+      "PowerShell(cd d:\\\\RetailPredict; $env:PYTHONPATH=\"d:\\\\RetailPredict\"; .\\\\.venv\\\\Scripts\\\\python.exe run_pipeline.py 2>&1 | Select-String -Pattern \"Method mix|Precision|Pipeline complete|customers=\" | Select-Object -Last 6)"
+    ],
+    "additionalDirectories": [
+      "D:\\RetailPredict\\pages"
+    ]
+  }
+}

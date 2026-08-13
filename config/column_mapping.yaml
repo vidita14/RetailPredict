@@ -1,0 +1,47 @@
+# RetailPredict ingestion config.
+# Point `dataset.path` at any retail CSV and remap `columns` to its header names;
+# no pipeline code changes required (PRD Section 10).
+
+dataset:
+  path: data/raw/online_retail.csv
+  encoding: latin-1
+
+# Canonical name (used internally) -> column name as it appears in the raw CSV.
+columns:
+  invoice_no: InvoiceNo
+  product_id: StockCode
+  description: Description
+  quantity: Quantity
+  invoice_date: InvoiceDate
+  unit_price: UnitPrice
+  customer_id: CustomerID
+  country: Country
+
+cleaning:
+  # Invoices whose number starts with this prefix are cancellations.
+  cancellation_prefix: "C"
+  # Missing product descriptions are filled rather than dropped (StockCode still usable).
+  unknown_product_name: "Unknown Product"
+  # Rows with no CustomerID are kept for product-level analytics but excluded
+  # from customer-level analytics (PRD Section 8.B).
+  keep_guest_transactions: true
+
+segmentation:
+  # Number of buckets for R/F/M scoring.
+  quantiles: 5
+
+recommendations:
+  top_k: 5
+  # Apriori parameters. min_support is deliberately low-ish; basket data is sparse.
+  min_support: 0.02
+  min_confidence: 0.3
+  min_lift: 1.0
+  # Cap rule mining to the N most-frequent products to keep Apriori tractable
+  # (PRD Section 32 risk mitigation).
+  max_products_for_apriori: 300
+  # Minimum co-occurrence count for a product pair to be considered.
+  min_co_occurrence: 5
+  # Cap the item-item similarity matrix; it grows as N^2 in product count.
+  max_products_for_similarity: 1500
+  # How many of a customer's most recent products seed association lookups.
+  recent_products_considered: 5
