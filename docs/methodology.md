@@ -35,7 +35,7 @@ The fallback deliberately walks from the narrowest population outward and keeps 
 
 ### Example output
 
-Sample flow from the bundled 40K-row synthetic dataset:
+Illustrative output from a generated 40K-row synthetic dataset:
 
 ```text
 --- Customer 12789 (Champions) ---
@@ -49,9 +49,11 @@ Sample flow from the bundled 40K-row synthetic dataset:
 
 ## Evaluation
 
-Each eligible customer's most recent invoice is held out, the recommender is **rebuilt from scratch on the earlier history only**, and we check whether the held-out products surface in the top K. Rebuilding — rather than filtering predictions after the fact — is what makes this a genuine holdout: the rules and similarity matrix never see the test period.
+For customers with at least two invoices, the most recent invoice is held out. The recommender, including RFM segments, association rules, and similarity matrix, is rebuilt without the held-out invoices. Other customers' retained transactions may occur after an individual customer's test invoice: this is a per-customer last-invoice split, not a global temporal holdout.
 
-Results on the bundled 40K-row synthetic dataset:
+Recommendations exclude products already purchased in training, but the relevance set includes all held-out products, including repeat purchases. Precision divides matches by K even when fewer than K recommendations are returned; recall divides by the full held-out product count. These metrics therefore measure novel-product recommendations against a basket that may also contain repeat purchases.
+
+Results for the synthetic example generated with `python -m scripts.make_sample_data --rows 40000 --seed 42`, followed by `python run_pipeline.py` (the generator adds duplicate rows, so the raw file contains 40,400 rows):
 
 | Metric | Value |
 |---|---|
@@ -65,4 +67,4 @@ Results on the bundled 40K-row synthetic dataset:
 
 Of the recommendations scored during evaluation, association rules produced 1,403 and item similarity produced 2,683 — popularity fallback did not appear in the holdout mix on this dataset.
 
-**Read these honestly.** Hit Rate@5 of 0.604 means that for 60% of customers, at least one held-out purchase appeared in their top 5. Coverage of 0.443 means recommendations spanned 44% of the catalog, so the engine is not merely pushing a handful of bestsellers. These are **historical accuracy measurements on this dataset** — not a projection, and not a claim about revenue impact. Numbers will differ on the real UCI dataset, which has a far larger and sparser catalog.
+**Read these honestly.** Hit Rate@5 of 0.604 means that for 60% of evaluated customers, at least one held-out purchase appeared in their top 5. Coverage of 0.443 means recommendations spanned 44% of the catalog; it does not establish relevance or improvement over popularity. These synthetic-data results exercise the pipeline, but there is no baseline comparison or measured revenue impact. Validate on real data and a global chronological split before making stronger claims. Each run writes its metrics to `data/processed/evaluation_report.json`.

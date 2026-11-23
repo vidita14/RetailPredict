@@ -11,7 +11,7 @@ RetailPredict has no HTTP API — it is a local pipeline plus a Streamlit dashbo
 | Command | Purpose | Key flags |
 |---|---|---|
 | `python run_pipeline.py` | Run the full pipeline end to end | `--dataset PATH`, `--db PATH`, `--skip-evaluation` |
-| `python scripts/make_sample_data.py` | Generate a synthetic UCI-shaped CSV | `--rows` (default 50000), `--customers` (1200), `--products` (140), `--seed` (42), `--out` |
+| `python -m scripts.make_sample_data` | Generate a synthetic UCI-shaped CSV from the repo root | `--rows` (default 50000), `--customers` (1200), `--products` (140), `--seed` (42), `--out` |
 | `streamlit run dashboard/app.py` | Launch the dashboard | Standard Streamlit flags, e.g. `--server.port` |
 | `python -m pytest` | Run the test suite | `-q`, `-k EXPR`, `-x` |
 

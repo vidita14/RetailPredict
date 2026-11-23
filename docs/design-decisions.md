@@ -9,7 +9,7 @@ The tradeoffs behind RetailPredict's architecture and algorithms.
 1. Single-user, local-first tool — no server process to install, configure, or keep running.
 2. Ships in the Python standard library (`sqlite3`) — zero extra dependencies.
 3. The whole database is one file (`database/retailpredict.db`); resetting state is deleting a file and re-running the pipeline.
-4. PostgreSQL is the documented upgrade path once concurrent multi-user access is actually needed — see [limitations](limitations-and-roadmap.md).
+4. A fixed snapshot can serve multiple dashboard viewers; PostgreSQL is an upgrade path when concurrent writes are needed. Authentication and data isolation are separate concerns — see [limitations](limitations-and-roadmap.md).
 
 ## Why rule-based RFM instead of K-Means?
 
@@ -21,7 +21,7 @@ The tradeoffs behind RetailPredict's architecture and algorithms.
 ## Why a three-tier hybrid recommender instead of one model?
 
 1. The project's core constraint is that every recommendation ships a plain-language reason — a single collaborative-filtering or deep model produces a score, not a reason.
-2. Association rules, item similarity, and popularity each fail differently: rules need co-occurrence, similarity needs an owned item to compare against, popularity needs nothing. Layering them guarantees every customer, including cold-start, gets a full list.
+2. Association rules, item similarity, and popularity each fail differently: rules need co-occurrence, similarity needs an owned item to compare against, popularity needs nothing. The fallback fills remaining slots for cold-start customers when eligible products exist; an exhausted catalog can yield fewer than K picks.
 3. Tier weighting (association `1.00` > similarity `0.85` > popularity `0.50`) lets stronger evidence outrank weaker evidence between tiers while preserving each tier's internal ranking.
 
 ## Why materialize rules and recommendations instead of computing them live?
