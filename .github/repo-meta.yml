@@ -1,0 +1,24 @@
+description: >
+  Turn a raw retail CSV into explainable customer segments, product recommendations,
+  and a six-page dashboard — all on your laptop.
+topics:
+  # Tier 1: big traffic
+  - python
+  - data-science
+  - machine-learning
+  - data-analytics
+  - business-intelligence
+  # Tier 2: domain-specific
+  - retail-analytics
+  - recommendation-engine
+  - customer-segmentation
+  - market-basket-analysis
+  - data-visualization
+  - dashboard
+  # Tier 3: ecosystem
+  - streamlit
+  - pandas
+  - sqlite
+  - scikit-learn
+  - plotly
+homepage: ""
